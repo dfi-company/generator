@@ -6,13 +6,7 @@
   <title>Генератор гарячого туману — знищуй комарів до того, як вони вкусять</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background: linear-gradient(135deg, #0d2818 0%, #091a28 60%, #0a1f2e 100%) fixed;
-      color: #ddeedd;
-      min-height: 100vh;
-    }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f7f0; color: #1a1a1a; }
 
     /* ── ALERT TICKER ── */
     .ticker {
@@ -23,15 +17,13 @@
       font-size: .9rem;
       font-weight: 600;
       letter-spacing: .3px;
-      position: relative;
-      z-index: 2;
     }
 
     /* ── HERO ── */
     .hero {
       position: relative;
       overflow: hidden;
-      background: linear-gradient(160deg, #0a2e12 0%, #1b5e20 55%, #0d3060 100%);
+      background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 60%, #388e3c 100%);
       color: #fff;
       padding: 50px 20px 20px;
       text-align: center;
@@ -54,36 +46,38 @@
     }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.75} }
 
-    /* FOG BLOBS */
+    /* FOG BLOBS (у hero — темно-зелений фон, білий туман видно) */
     .fog-blob {
       position: absolute;
       border-radius: 50%;
-      filter: blur(80px);
       pointer-events: none;
       z-index: 1;
     }
     .fog-blob-1 {
       width: 500px; height: 260px;
       top: -60px; left: -100px;
-      background: radial-gradient(ellipse, rgba(255,255,255,.09) 0%, transparent 70%);
+      background: radial-gradient(ellipse, rgba(255,255,255,.1) 0%, transparent 70%);
+      filter: blur(70px);
       animation: fogDrift1 22s linear infinite;
     }
     .fog-blob-2 {
       width: 420px; height: 200px;
       top: 40px; right: -80px;
-      background: radial-gradient(ellipse, rgba(200,240,220,.08) 0%, transparent 70%);
+      background: radial-gradient(ellipse, rgba(255,255,255,.08) 0%, transparent 70%);
+      filter: blur(80px);
       animation: fogDrift2 28s linear infinite;
     }
     .fog-blob-3 {
       width: 340px; height: 180px;
       bottom: 0; left: 30%;
-      background: radial-gradient(ellipse, rgba(255,255,255,.06) 0%, transparent 70%);
+      background: radial-gradient(ellipse, rgba(255,255,255,.07) 0%, transparent 70%);
+      filter: blur(60px);
       animation: fogDrift3 18s linear infinite;
     }
     @keyframes fogDrift1 {
-      0%   { transform: translateX(0);   opacity: .7; }
+      0%   { transform: translateX(0);    opacity: .7; }
       50%  { transform: translateX(120px); opacity: 1; }
-      100% { transform: translateX(0);  opacity: .7; }
+      100% { transform: translateX(0);    opacity: .7; }
     }
     @keyframes fogDrift2 {
       0%   { transform: translateX(0); }
@@ -98,14 +92,13 @@
 
     /* TOP FORM BLOCK */
     .top-form-block {
-      background: rgba(0,0,0,.45);
-      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.28);
       border-radius: 16px;
       padding: 28px 24px;
       max-width: 460px;
       margin: 0 auto 30px;
-      backdrop-filter: blur(8px);
-      box-shadow: 0 8px 40px rgba(0,0,0,.5);
+      backdrop-filter: blur(4px);
+      box-shadow: 0 8px 32px rgba(0,0,0,.25);
       position: relative;
       z-index: 2;
     }
@@ -119,7 +112,7 @@
       border-radius: 8px;
       font-size: 1rem;
       font-family: inherit;
-      background: rgba(255,255,255,.95);
+      background: #fff;
       color: #111;
     }
     .top-form-block input:focus { outline: 2px solid #ffcc02; }
@@ -150,27 +143,25 @@
     .top-form-block .phone-link:hover { opacity: 1; text-decoration: underline; }
 
     /* NEWS BANNER */
-    .news-wrap { background: rgba(0,0,0,.35); padding: 24px 20px; border-top: 1px solid rgba(255,255,255,.06); }
+    .news-wrap { background: #fff8f0; padding: 24px 20px; }
     .news-banner {
-      background: rgba(255,243,205,.1);
+      background: #fff3cd;
       border-left: 6px solid #b71c1c;
       padding: 20px 24px;
       max-width: 860px;
       margin: 0 auto;
       border-radius: 0 10px 10px 0;
-      backdrop-filter: blur(4px);
     }
     .news-banner .news-label {
       font-size: .75rem;
       font-weight: 700;
       text-transform: uppercase;
-      color: #ff6b6b;
+      color: #b71c1c;
       letter-spacing: 1px;
       margin-bottom: 8px;
     }
-    .news-banner h3 { font-size: 1.05rem; color: #fff; line-height: 1.55; font-weight: 700; }
-    .news-banner p { font-size: .92rem; color: #ccc; margin-top: 8px; line-height: 1.6; }
-    .news-banner p strong { color: #ffb3b3; }
+    .news-banner h3 { font-size: 1.05rem; color: #222; line-height: 1.55; font-weight: 700; }
+    .news-banner p { font-size: .92rem; color: #444; margin-top: 8px; line-height: 1.6; }
     .news-banner .solution {
       margin-top: 14px;
       background: #e65100;
@@ -186,10 +177,10 @@
     .section { max-width: 900px; margin: 0 auto; padding: 50px 20px; }
     .section-title {
       font-size: 1.5rem;
-      color: #6fcf97;
+      color: #1b5e20;
       margin-bottom: 24px;
       padding-bottom: 10px;
-      border-bottom: 3px solid #2e7d32;
+      border-bottom: 3px solid #a5d6a7;
     }
 
     /* GALLERY */
@@ -200,29 +191,29 @@
       border-radius: 12px;
       object-fit: cover;
       max-height: 320px;
-      box-shadow: 0 4px 24px rgba(0,0,0,.4);
+      box-shadow: 0 4px 16px rgba(0,0,0,.12);
       cursor: zoom-in;
       transition: transform .2s, box-shadow .2s;
       display: block;
     }
-    .gallery-thumb:hover { transform: scale(1.02); box-shadow: 0 8px 36px rgba(0,0,0,.55); }
+    .gallery-thumb:hover { transform: scale(1.02); box-shadow: 0 8px 28px rgba(0,0,0,.22); }
 
     /* LIGHTBOX */
     .lightbox {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,.92);
+      background: rgba(0,0,0,.9);
       z-index: 9999;
       justify-content: center;
       align-items: center;
       padding: 20px;
     }
     .lightbox.open { display: flex; }
-    .lightbox img { max-width: 92vw; max-height: 90vh; border-radius: 10px; box-shadow: 0 8px 48px rgba(0,0,0,.6); object-fit: contain; }
+    .lightbox img { max-width: 92vw; max-height: 90vh; border-radius: 10px; object-fit: contain; }
     .lightbox-close {
       position: absolute; top: 18px; right: 24px;
-      font-size: 2.4rem; color: #fff; cursor: pointer; line-height: 1;
+      font-size: 2.4rem; color: #fff; cursor: pointer;
       opacity: .8; transition: opacity .15s; background: none; border: none;
     }
     .lightbox-close:hover { opacity: 1; }
@@ -240,115 +231,92 @@
     .video-wrap {
       position: relative; padding-bottom: 56.25%;
       border-radius: 12px; overflow: hidden;
-      box-shadow: 0 4px 24px rgba(0,0,0,.4); background: #000;
+      box-shadow: 0 4px 16px rgba(0,0,0,.15); background: #000;
     }
     .video-wrap video { position: absolute; top:0; left:0; width:100%; height:100%; }
 
     /* PAIN POINTS — з силуетами комарів */
-    .pain-section { position: relative; overflow: hidden; }
-    .pain-section .mosquito-bg {
-      position: absolute; pointer-events: none; opacity: .04; color: #fff;
+    .pain-section { background: #fff; position: relative; overflow: hidden; }
+    .mosquito-wm {
+      position: absolute;
+      pointer-events: none;
+      color: #1b5e20;
     }
-    .pain-section .mosquito-bg.m1 { top: 10px; right: 5%; width: 120px; transform: rotate(30deg); }
-    .pain-section .mosquito-bg.m2 { bottom: 20px; left: 3%; width: 90px; transform: rotate(-15deg); }
-    .pain-section .mosquito-bg.m3 { top: 40%; right: 2%; width: 70px; transform: rotate(60deg); }
     .pain-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 16px; }
     .pain-card {
-      border: 1px solid rgba(255,100,100,.25);
+      border: 2px solid #ffcdd2;
       border-radius: 12px;
       padding: 20px;
-      background: rgba(180,30,30,.08);
+      background: #fff9f9;
       text-align: center;
     }
     .pain-card .icon { font-size: 2rem; margin-bottom: 8px; }
-    .pain-card p { font-size: .9rem; color: #e0cccc; line-height: 1.5; font-weight: 500; }
+    .pain-card p { font-size: .9rem; color: #444; line-height: 1.5; font-weight: 500; }
 
     /* FEATURES — з силуетами комарів */
-    .features-section { position: relative; overflow: hidden; }
-    .features-section .mosquito-bg {
-      position: absolute; pointer-events: none; opacity: .035; color: #fff;
-    }
-    .features-section .mosquito-bg.m1 { bottom: 10px; left: 2%; width: 110px; transform: rotate(-20deg); }
-    .features-section .mosquito-bg.m2 { top: 15px; right: 4%; width: 85px; transform: rotate(45deg); }
+    .features-wrap { background: #fff; position: relative; overflow: hidden; }
     .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px,1fr)); gap: 16px; }
     .feature-card {
-      background: rgba(255,255,255,.05);
-      border: 1px solid rgba(255,255,255,.08);
+      background: #f9fdf9;
+      border: 1px solid #c8e6c9;
       border-radius: 12px; padding: 20px;
-      box-shadow: 0 2px 12px rgba(0,0,0,.3); text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,.05); text-align: center;
     }
     .feature-card .icon { font-size: 2.2rem; margin-bottom: 10px; }
-    .feature-card h4 { font-size: 1rem; color: #6fcf97; margin-bottom: 6px; }
-    .feature-card p { font-size: .88rem; color: #bbd; line-height: 1.5; }
+    .feature-card h4 { font-size: 1rem; color: #2e7d32; margin-bottom: 6px; }
+    .feature-card p { font-size: .88rem; color: #555; line-height: 1.5; }
 
     /* USE CASES */
     .use-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap: 18px; }
     .use-card {
-      background: rgba(255,255,255,.05);
-      border: 1px solid rgba(255,255,255,.08);
+      background: #fff;
       border-radius: 14px;
       padding: 22px;
-      box-shadow: 0 2px 14px rgba(0,0,0,.25);
+      box-shadow: 0 2px 12px rgba(0,0,0,.07);
       border-left: 5px solid #2e7d32;
     }
     .use-icon { font-size: 2rem; margin-bottom: 10px; }
-    .use-card h3 { font-size: 1rem; color: #6fcf97; margin-bottom: 8px; }
-    .use-card p { font-size: .88rem; color: #bbd; line-height: 1.6; }
+    .use-card h3 { font-size: 1rem; color: #1b5e20; margin-bottom: 8px; }
+    .use-card p { font-size: .88rem; color: #555; line-height: 1.6; }
 
     /* DESCRIPTION */
-    .desc {
-      background: rgba(255,255,255,.05);
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: 12px; padding: 28px;
-      box-shadow: 0 2px 12px rgba(0,0,0,.3);
-    }
-    .desc h3 { color: #6fcf97; margin-bottom: 14px; }
-    .desc p { color: #bbd; }
+    .desc { background: #fff; border-radius: 12px; padding: 28px; box-shadow: 0 2px 10px rgba(0,0,0,.07); }
+    .desc h3 { color: #1b5e20; margin-bottom: 14px; }
     .desc ul { padding-left: 20px; }
-    .desc ul li { margin-bottom: 8px; line-height: 1.6; color: #ccd; }
+    .desc ul li { margin-bottom: 8px; line-height: 1.6; color: #333; }
 
     /* REVIEWS */
+    .reviews-section { background: #f0f7f0; }
     .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 20px; }
     .review-card {
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.09);
+      background: #fff;
       border-radius: 14px;
       padding: 24px;
-      box-shadow: 0 2px 16px rgba(0,0,0,.3);
+      box-shadow: 0 2px 12px rgba(0,0,0,.07);
       border-top: 4px solid #2e7d32;
     }
     .review-stars { color: #f9a825; font-size: 1.1rem; margin-bottom: 10px; letter-spacing: 2px; }
-    .review-text { font-size: .95rem; color: #ccd; line-height: 1.65; margin-bottom: 14px; font-style: italic; }
+    .review-text { font-size: .95rem; color: #333; line-height: 1.65; margin-bottom: 14px; font-style: italic; }
     .review-author { display: flex; align-items: center; gap: 10px; }
     .review-avatar {
       width: 40px; height: 40px; border-radius: 50%;
-      background: #2e7d32;
+      background: #a5d6a7;
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.1rem; font-weight: 700; color: #fff; flex-shrink: 0;
+      font-size: 1.1rem; font-weight: 700; color: #1b5e20; flex-shrink: 0;
     }
-    .review-name { font-weight: 700; font-size: .92rem; color: #6fcf97; }
-    .review-meta { font-size: .8rem; color: #88a; }
+    .review-name { font-weight: 700; font-size: .92rem; color: #1b5e20; }
+    .review-meta { font-size: .8rem; color: #888; }
 
     /* BOTTOM ORDER FORM */
-    .order-section { background: rgba(0,0,0,.4); border-top: 1px solid rgba(255,255,255,.07); }
+    .order-section { background: #1b5e20; }
     .order-section .section { text-align: center; }
-    .order-section .section-title { color: #6fcf97; border-bottom-color: #2e7d32; }
-    .order-section .sub-text { color: rgba(255,255,255,.75); margin-bottom: 24px; font-size: 1rem; }
-    .bottom-form-wrap {
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 16px;
-      padding: 28px;
-      max-width: 460px;
-      margin: 0 auto;
-      box-shadow: 0 8px 40px rgba(0,0,0,.5);
-      backdrop-filter: blur(6px);
-    }
-    form.bottom-form { display: flex; flex-direction: column; gap: 12px; }
+    .order-section .section-title { color: #fff; border-bottom-color: #4caf50; }
+    .order-section .sub-text { color: rgba(255,255,255,.8); margin-bottom: 24px; font-size: 1rem; }
+    form.bottom-form { display: flex; flex-direction: column; gap: 12px; max-width: 440px; margin: 0 auto; }
     form.bottom-form input, form.bottom-form textarea {
-      padding: 14px 16px; border: 1.5px solid rgba(255,255,255,.2);
+      padding: 14px 16px; border: 2px solid rgba(255,255,255,.3);
       border-radius: 8px; font-size: 1rem; font-family: inherit;
-      background: rgba(255,255,255,.9); color: #111; transition: border-color .2s;
+      background: rgba(255,255,255,.92); color: #111; transition: border-color .2s;
     }
     form.bottom-form input:focus, form.bottom-form textarea:focus { outline: none; border-color: #ffcc02; }
     form.bottom-form textarea { resize: vertical; min-height: 80px; }
@@ -368,16 +336,12 @@
 
     /* SUCCESS */
     .success-msg {
-      display: none; background: rgba(46,125,50,.3); border-radius: 8px;
+      display: none; background: rgba(255,255,255,.15); border-radius: 8px;
       padding: 20px; text-align: center; font-size: 1.1rem;
-      color: #c8e6c9; font-weight: 700; border: 2px solid #4caf50;
-      margin-top: 12px;
+      color: #fff; font-weight: 700; border: 2px solid #a5d6a7;
     }
 
-    footer { background: rgba(0,0,0,.5); color: #557; text-align: center; padding: 20px; font-size: .83rem; border-top: 1px solid rgba(255,255,255,.05); }
-
-    /* DIVIDERS between sections */
-    .section-sep { border: none; border-top: 1px solid rgba(255,255,255,.06); margin: 0; }
+    footer { background: #111; color: #666; text-align: center; padding: 20px; font-size: .83rem; }
   </style>
 </head>
 <body>
@@ -397,7 +361,6 @@
 
 <!-- HERO + TOP FORM -->
 <div class="hero">
-  <!-- fog blobs -->
   <div class="fog-blob fog-blob-1"></div>
   <div class="fog-blob fog-blob-2"></div>
   <div class="fog-blob fog-blob-3"></div>
@@ -433,76 +396,56 @@
   </div>
 </div>
 
-<hr class="section-sep" />
-
 <!-- PAIN POINTS (з силуетами комарів) -->
 <div class="pain-section">
-  <!-- mosquito watermarks -->
-  <svg class="mosquito-bg m1" viewBox="0 0 100 130" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-    <ellipse cx="50" cy="72" rx="7" ry="22"/>
-    <circle cx="50" cy="44" r="8"/>
-    <rect x="49" y="52" width="2" height="18"/>
-    <line x1="50" y1="37" x2="50" y2="18" stroke="currentColor" stroke-width="2"/>
-    <ellipse cx="27" cy="60" rx="22" ry="7" transform="rotate(-15 27 60)"/>
-    <ellipse cx="73" cy="60" rx="22" ry="7" transform="rotate(15 73 60)"/>
-    <line x1="43" y1="72" x2="18" y2="92" stroke="currentColor" stroke-width="2"/>
-    <line x1="43" y1="80" x2="16" y2="100" stroke="currentColor" stroke-width="2"/>
-    <line x1="43" y1="88" x2="20" y2="108" stroke="currentColor" stroke-width="2"/>
-    <line x1="57" y1="72" x2="82" y2="92" stroke="currentColor" stroke-width="2"/>
-    <line x1="57" y1="80" x2="84" y2="100" stroke="currentColor" stroke-width="2"/>
-    <line x1="57" y1="88" x2="80" y2="108" stroke="currentColor" stroke-width="2"/>
-    <line x1="46" y1="38" x2="34" y2="22" stroke="currentColor" stroke-width="2"/>
-    <line x1="54" y1="38" x2="66" y2="22" stroke="currentColor" stroke-width="2"/>
+  <!-- watermark mosquitoes: opacity 4%, колір темно-зелений на білому -->
+  <svg class="mosquito-wm" style="opacity:.04;width:130px;top:10px;right:4%;transform:rotate(25deg)" viewBox="0 0 100 130" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="50" cy="75" rx="7" ry="22"/><circle cx="50" cy="47" r="8"/>
+    <line x1="50" y1="40" x2="50" y2="20" stroke="currentColor" stroke-width="2.5"/>
+    <ellipse cx="26" cy="62" rx="23" ry="7" transform="rotate(-15 26 62)"/>
+    <ellipse cx="74" cy="62" rx="23" ry="7" transform="rotate(15 74 62)"/>
+    <line x1="43" y1="74" x2="16" y2="94" stroke="currentColor" stroke-width="2"/>
+    <line x1="43" y1="82" x2="14" y2="102" stroke="currentColor" stroke-width="2"/>
+    <line x1="43" y1="90" x2="18" y2="110" stroke="currentColor" stroke-width="2"/>
+    <line x1="57" y1="74" x2="84" y2="94" stroke="currentColor" stroke-width="2"/>
+    <line x1="57" y1="82" x2="86" y2="102" stroke="currentColor" stroke-width="2"/>
+    <line x1="57" y1="90" x2="82" y2="110" stroke="currentColor" stroke-width="2"/>
+    <line x1="46" y1="41" x2="34" y2="24" stroke="currentColor" stroke-width="2"/>
+    <line x1="54" y1="41" x2="66" y2="24" stroke="currentColor" stroke-width="2"/>
   </svg>
-  <svg class="mosquito-bg m2" viewBox="0 0 100 130" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-    <ellipse cx="50" cy="72" rx="7" ry="22"/>
-    <circle cx="50" cy="44" r="8"/>
-    <line x1="50" y1="37" x2="50" y2="18" stroke="currentColor" stroke-width="2"/>
-    <ellipse cx="27" cy="60" rx="22" ry="7" transform="rotate(-15 27 60)"/>
-    <ellipse cx="73" cy="60" rx="22" ry="7" transform="rotate(15 73 60)"/>
-    <line x1="43" y1="72" x2="18" y2="92" stroke="currentColor" stroke-width="2"/>
-    <line x1="43" y1="80" x2="16" y2="100" stroke="currentColor" stroke-width="2"/>
-    <line x1="57" y1="72" x2="82" y2="92" stroke="currentColor" stroke-width="2"/>
-    <line x1="57" y1="80" x2="84" y2="100" stroke="currentColor" stroke-width="2"/>
-    <line x1="46" y1="38" x2="34" y2="22" stroke="currentColor" stroke-width="2"/>
-    <line x1="54" y1="38" x2="66" y2="22" stroke="currentColor" stroke-width="2"/>
+  <svg class="mosquito-wm" style="opacity:.035;width:95px;bottom:15px;left:2%;transform:rotate(-20deg)" viewBox="0 0 100 130" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="50" cy="75" rx="7" ry="22"/><circle cx="50" cy="47" r="8"/>
+    <line x1="50" y1="40" x2="50" y2="20" stroke="currentColor" stroke-width="2.5"/>
+    <ellipse cx="26" cy="62" rx="23" ry="7" transform="rotate(-15 26 62)"/>
+    <ellipse cx="74" cy="62" rx="23" ry="7" transform="rotate(15 74 62)"/>
+    <line x1="43" y1="74" x2="16" y2="94" stroke="currentColor" stroke-width="2"/>
+    <line x1="43" y1="82" x2="14" y2="102" stroke="currentColor" stroke-width="2"/>
+    <line x1="57" y1="74" x2="84" y2="94" stroke="currentColor" stroke-width="2"/>
+    <line x1="57" y1="82" x2="86" y2="102" stroke="currentColor" stroke-width="2"/>
+    <line x1="46" y1="41" x2="34" y2="24" stroke="currentColor" stroke-width="2"/>
+    <line x1="54" y1="41" x2="66" y2="24" stroke="currentColor" stroke-width="2"/>
   </svg>
-  <svg class="mosquito-bg m3" viewBox="0 0 100 130" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-    <ellipse cx="50" cy="72" rx="7" ry="22"/>
-    <circle cx="50" cy="44" r="8"/>
-    <line x1="50" y1="37" x2="50" y2="18" stroke="currentColor" stroke-width="2"/>
-    <ellipse cx="27" cy="60" rx="22" ry="7" transform="rotate(-15 27 60)"/>
-    <ellipse cx="73" cy="60" rx="22" ry="7" transform="rotate(15 73 60)"/>
-    <line x1="43" y1="72" x2="18" y2="92" stroke="currentColor" stroke-width="2"/>
-    <line x1="57" y1="72" x2="82" y2="92" stroke="currentColor" stroke-width="2"/>
-    <line x1="46" y1="38" x2="34" y2="22" stroke="currentColor" stroke-width="2"/>
-    <line x1="54" y1="38" x2="66" y2="22" stroke="currentColor" stroke-width="2"/>
+  <svg class="mosquito-wm" style="opacity:.03;width:75px;top:45%;right:1%;transform:rotate(55deg)" viewBox="0 0 100 130" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="50" cy="75" rx="7" ry="22"/><circle cx="50" cy="47" r="8"/>
+    <line x1="50" y1="40" x2="50" y2="20" stroke="currentColor" stroke-width="2.5"/>
+    <ellipse cx="26" cy="62" rx="23" ry="7" transform="rotate(-15 26 62)"/>
+    <ellipse cx="74" cy="62" rx="23" ry="7" transform="rotate(15 74 62)"/>
+    <line x1="43" y1="74" x2="16" y2="94" stroke="currentColor" stroke-width="2"/>
+    <line x1="57" y1="74" x2="84" y2="94" stroke="currentColor" stroke-width="2"/>
+    <line x1="46" y1="41" x2="34" y2="24" stroke="currentColor" stroke-width="2"/>
+    <line x1="54" y1="41" x2="66" y2="24" stroke="currentColor" stroke-width="2"/>
   </svg>
 
   <div class="section">
     <h2 class="section-title">Чи знайома тобі ця ситуація?</h2>
     <div class="pain-grid">
-      <div class="pain-card">
-        <div class="icon">😰</div>
-        <p>Вийти на вулицю ввечері — справжній подвиг через комарів і мошок</p>
-      </div>
-      <div class="pain-card">
-        <div class="icon">🌿</div>
-        <p>Шкідники знищують врожай, а звичайний обприскувач не допомагає</p>
-      </div>
-      <div class="pain-card">
-        <div class="icon">💸</div>
-        <p>Витрачаєш гроші на спреї та фумігатори — а результату немає</p>
-      </div>
-      <div class="pain-card">
-        <div class="icon">😤</div>
-        <p>Боїшся за здоров'я дітей через небезпечні комахи та інфекції</p>
-      </div>
+      <div class="pain-card"><div class="icon">😰</div><p>Вийти на вулицю ввечері — справжній подвиг через комарів і мошок</p></div>
+      <div class="pain-card"><div class="icon">🌿</div><p>Шкідники знищують врожай, а звичайний обприскувач не допомагає</p></div>
+      <div class="pain-card"><div class="icon">💸</div><p>Витрачаєш гроші на спреї та фумігатори — а результату немає</p></div>
+      <div class="pain-card"><div class="icon">😤</div><p>Боїшся за здоров'я дітей через небезпечні комахи та інфекції</p></div>
     </div>
   </div>
 </div>
-
-<hr class="section-sep" />
 
 <!-- PRODUCT PHOTOS / GALLERY -->
 <div class="section">
@@ -524,123 +467,69 @@
   </div>
 </div>
 
-<hr class="section-sep" />
-
 <!-- USE CASES -->
-<div class="section">
-  <h2 class="section-title">Генератор туману — не лише від комарів</h2>
-  <p style="color:#aac; margin-bottom:28px; font-size:1rem; line-height:1.7;">
-    Це універсальний прилад для дому, саду та господарства. Один генератор закриває десятки завдань протягом усього сезону.
-  </p>
-  <div class="use-grid">
-    <div class="use-card">
-      <div class="use-icon">🦟</div>
-      <h3>Комарі та мошки</h3>
-      <p>Знищує дорослих особин та личинки. Ефект тримається 2–4 тижні після обробки ділянки, двору, берегової зони.</p>
-    </div>
-    <div class="use-card">
-      <div class="use-icon">🕷️</div>
-      <h3>Кліщі та павуки</h3>
-      <p>Обробка газону, чагарників та дерев — кліщі зникають після першої ж процедури. Безпечно для дітей та домашніх тварин після висихання.</p>
-    </div>
-    <div class="use-card">
-      <div class="use-icon">🐛</div>
-      <h3>Шкідники рослин</h3>
-      <p>Попелиця, білокрилка, трипси, колорадський жук — туман рівномірно покриває листя з обох боків там, де обприскувач не дістає.</p>
-    </div>
-    <div class="use-card">
-      <div class="use-icon">🍄</div>
-      <h3>Грибкові хвороби</h3>
-      <p>Фунгіцидна обробка теплиць, виноградників, садів. Дрібнодисперсний туман проникає в усі щілини та не залишає патогенам шансів.</p>
-    </div>
-    <div class="use-card">
-      <div class="use-icon">🐀</div>
-      <h3>Комахи в приміщеннях</h3>
-      <p>Мухи, таргани, блохи, молі у складах, птахофермах, гаражах і підвалах — туман заповнює весь об'єм приміщення за лічені хвилини.</p>
-    </div>
-    <div class="use-card">
-      <div class="use-icon">🧼</div>
-      <h3>Дезінфекція та санація</h3>
-      <p>Обробка дезінфектантами: тваринницькі ферми, склади зберігання зерна, підсобні приміщення, вулиці після повеней або спалахів хвороб.</p>
+<div style="background:#e8f5e9;">
+  <div class="section">
+    <h2 class="section-title">Генератор туману — не лише від комарів</h2>
+    <p style="color:#444; margin-bottom:28px; font-size:1rem; line-height:1.7;">
+      Це універсальний прилад для дому, саду та господарства. Один генератор закриває десятки завдань протягом усього сезону.
+    </p>
+    <div class="use-grid">
+      <div class="use-card"><div class="use-icon">🦟</div><h3>Комарі та мошки</h3><p>Знищує дорослих особин та личинки. Ефект тримається 2–4 тижні після обробки ділянки, двору, берегової зони.</p></div>
+      <div class="use-card"><div class="use-icon">🕷️</div><h3>Кліщі та павуки</h3><p>Обробка газону, чагарників та дерев — кліщі зникають після першої ж процедури. Безпечно для дітей та домашніх тварин після висихання.</p></div>
+      <div class="use-card"><div class="use-icon">🐛</div><h3>Шкідники рослин</h3><p>Попелиця, білокрилка, трипси, колорадський жук — туман рівномірно покриває листя з обох боків там, де обприскувач не дістає.</p></div>
+      <div class="use-card"><div class="use-icon">🍄</div><h3>Грибкові хвороби</h3><p>Фунгіцидна обробка теплиць, виноградників, садів. Дрібнодисперсний туман проникає в усі щілини та не залишає патогенам шансів.</p></div>
+      <div class="use-card"><div class="use-icon">🐀</div><h3>Комахи в приміщеннях</h3><p>Мухи, таргани, блохи, молі у складах, птахофермах, гаражах і підвалах — туман заповнює весь об'єм приміщення за лічені хвилини.</p></div>
+      <div class="use-card"><div class="use-icon">🧼</div><h3>Дезінфекція та санація</h3><p>Обробка дезінфектантами: тваринницькі ферми, склади зерна, підсобні приміщення, вулиці після повеней або спалахів хвороб.</p></div>
     </div>
   </div>
 </div>
 
-<hr class="section-sep" />
-
 <!-- FEATURES (з силуетами комарів) -->
-<div class="features-section">
-  <svg class="mosquito-bg m1" viewBox="0 0 100 130" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-    <ellipse cx="50" cy="72" rx="7" ry="22"/>
-    <circle cx="50" cy="44" r="8"/>
-    <line x1="50" y1="37" x2="50" y2="18" stroke="currentColor" stroke-width="2"/>
-    <ellipse cx="27" cy="60" rx="22" ry="7" transform="rotate(-15 27 60)"/>
-    <ellipse cx="73" cy="60" rx="22" ry="7" transform="rotate(15 73 60)"/>
-    <line x1="43" y1="72" x2="18" y2="92" stroke="currentColor" stroke-width="2"/>
-    <line x1="43" y1="80" x2="16" y2="100" stroke="currentColor" stroke-width="2"/>
-    <line x1="43" y1="88" x2="20" y2="108" stroke="currentColor" stroke-width="2"/>
-    <line x1="57" y1="72" x2="82" y2="92" stroke="currentColor" stroke-width="2"/>
-    <line x1="57" y1="80" x2="84" y2="100" stroke="currentColor" stroke-width="2"/>
-    <line x1="57" y1="88" x2="80" y2="108" stroke="currentColor" stroke-width="2"/>
-    <line x1="46" y1="38" x2="34" y2="22" stroke="currentColor" stroke-width="2"/>
-    <line x1="54" y1="38" x2="66" y2="22" stroke="currentColor" stroke-width="2"/>
+<div class="features-wrap">
+  <svg class="mosquito-wm" style="opacity:.035;width:115px;bottom:10px;left:1%;transform:rotate(-25deg)" viewBox="0 0 100 130" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="50" cy="75" rx="7" ry="22"/><circle cx="50" cy="47" r="8"/>
+    <line x1="50" y1="40" x2="50" y2="20" stroke="currentColor" stroke-width="2.5"/>
+    <ellipse cx="26" cy="62" rx="23" ry="7" transform="rotate(-15 26 62)"/>
+    <ellipse cx="74" cy="62" rx="23" ry="7" transform="rotate(15 74 62)"/>
+    <line x1="43" y1="74" x2="16" y2="94" stroke="currentColor" stroke-width="2"/>
+    <line x1="43" y1="82" x2="14" y2="102" stroke="currentColor" stroke-width="2"/>
+    <line x1="43" y1="90" x2="18" y2="110" stroke="currentColor" stroke-width="2"/>
+    <line x1="57" y1="74" x2="84" y2="94" stroke="currentColor" stroke-width="2"/>
+    <line x1="57" y1="82" x2="86" y2="102" stroke="currentColor" stroke-width="2"/>
+    <line x1="57" y1="90" x2="82" y2="110" stroke="currentColor" stroke-width="2"/>
+    <line x1="46" y1="41" x2="34" y2="24" stroke="currentColor" stroke-width="2"/>
+    <line x1="54" y1="41" x2="66" y2="24" stroke="currentColor" stroke-width="2"/>
   </svg>
-  <svg class="mosquito-bg m2" viewBox="0 0 100 130" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-    <ellipse cx="50" cy="72" rx="7" ry="22"/>
-    <circle cx="50" cy="44" r="8"/>
-    <line x1="50" y1="37" x2="50" y2="18" stroke="currentColor" stroke-width="2"/>
-    <ellipse cx="27" cy="60" rx="22" ry="7" transform="rotate(-15 27 60)"/>
-    <ellipse cx="73" cy="60" rx="22" ry="7" transform="rotate(15 73 60)"/>
-    <line x1="43" y1="72" x2="18" y2="92" stroke="currentColor" stroke-width="2"/>
-    <line x1="57" y1="72" x2="82" y2="92" stroke="currentColor" stroke-width="2"/>
-    <line x1="46" y1="38" x2="34" y2="22" stroke="currentColor" stroke-width="2"/>
-    <line x1="54" y1="38" x2="66" y2="22" stroke="currentColor" stroke-width="2"/>
+  <svg class="mosquito-wm" style="opacity:.03;width:88px;top:12px;right:3%;transform:rotate(40deg)" viewBox="0 0 100 130" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="50" cy="75" rx="7" ry="22"/><circle cx="50" cy="47" r="8"/>
+    <line x1="50" y1="40" x2="50" y2="20" stroke="currentColor" stroke-width="2.5"/>
+    <ellipse cx="26" cy="62" rx="23" ry="7" transform="rotate(-15 26 62)"/>
+    <ellipse cx="74" cy="62" rx="23" ry="7" transform="rotate(15 74 62)"/>
+    <line x1="43" y1="74" x2="16" y2="94" stroke="currentColor" stroke-width="2"/>
+    <line x1="57" y1="74" x2="84" y2="94" stroke="currentColor" stroke-width="2"/>
+    <line x1="46" y1="41" x2="34" y2="24" stroke="currentColor" stroke-width="2"/>
+    <line x1="54" y1="41" x2="66" y2="24" stroke="currentColor" stroke-width="2"/>
   </svg>
   <div class="section">
     <h2 class="section-title">Чому саме гарячий туман?</h2>
     <div class="features">
-      <div class="feature-card">
-        <div class="icon">🦟</div>
-        <h4>100% охоплення</h4>
-        <p>Туман проникає під листя, у щілини, кущі та нори — туди, де комарі ховаються вдень.</p>
-      </div>
-      <div class="feature-card">
-        <div class="icon">⚡</div>
-        <h4>Миттєвий результат</h4>
-        <p>Вже через 30 хвилин після обробки можна виходити на вулицю без страху.</p>
-      </div>
-      <div class="feature-card">
-        <div class="icon">🌿</div>
-        <h4>Захист рослин</h4>
-        <p>Ефективна обробка від кліщів, попелиці, грибкових хвороб — рівномірно по всьому листу.</p>
-      </div>
-      <div class="feature-card">
-        <div class="icon">💰</div>
-        <h4>Економія в рази</h4>
-        <p>Один прилад замінює десятки банок спрею. Препарат витрачається мінімально.</p>
-      </div>
-      <div class="feature-card">
-        <div class="icon">🏠</div>
-        <h4>Дезінфекція приміщень</h4>
-        <p>Склади, ферми, підвали, гаражі — повна санація без зусиль.</p>
-      </div>
-      <div class="feature-card">
-        <div class="icon">🔋</div>
-        <h4>Без мережі</h4>
-        <p>Бензиновий двигун — обробляй будь-де: на полі, у лісі, на дачі.</p>
-      </div>
+      <div class="feature-card"><div class="icon">🦟</div><h4>100% охоплення</h4><p>Туман проникає під листя, у щілини, кущі та нори — туди, де комарі ховаються вдень.</p></div>
+      <div class="feature-card"><div class="icon">⚡</div><h4>Миттєвий результат</h4><p>Вже через 30 хвилин після обробки можна виходити на вулицю без страху.</p></div>
+      <div class="feature-card"><div class="icon">🌿</div><h4>Захист рослин</h4><p>Ефективна обробка від кліщів, попелиці, грибкових хвороб — рівномірно по всьому листу.</p></div>
+      <div class="feature-card"><div class="icon">💰</div><h4>Економія в рази</h4><p>Один прилад замінює десятки банок спрею. Препарат витрачається мінімально.</p></div>
+      <div class="feature-card"><div class="icon">🏠</div><h4>Дезінфекція приміщень</h4><p>Склади, ферми, підвали, гаражі — повна санація без зусиль.</p></div>
+      <div class="feature-card"><div class="icon">🔋</div><h4>Без мережі</h4><p>Бензиновий двигун — обробляй будь-де: на полі, у лісі, на дачі.</p></div>
     </div>
   </div>
 </div>
-
-<hr class="section-sep" />
 
 <!-- DESCRIPTION -->
 <div class="section">
   <h2 class="section-title">Опис товару</h2>
   <div class="desc">
     <h3>Генератор гарячого туману — професійний захист для дому та господарства</h3>
-    <p style="margin-bottom:14px; line-height:1.6;">
+    <p style="margin-bottom:14px; color:#555; line-height:1.6;">
       Потужний генератор гарячого туману перетворює рідкий препарат на дрібнодисперсний аерозоль, який моментально заповнює весь простір. Це не просто обприскувач — це зброя проти будь-яких шкідників та патогенів.
     </p>
     <ul>
@@ -655,77 +544,49 @@
   </div>
 </div>
 
-<hr class="section-sep" />
-
 <!-- REVIEWS -->
-<div class="section">
-  <h2 class="section-title">Відгуки покупців</h2>
-  <div class="reviews-grid">
-    <div class="review-card">
-      <div class="review-stars">★★★★★</div>
-      <p class="review-text">«Замовив генератор після того, як на дачі з'явилися комарі — вже на другий день після обробки забув, що таке кусачки. Дружина в захваті, діти нарешті можуть гуляти ввечері. Рекомендую всім!»</p>
-      <div class="review-author">
-        <div class="review-avatar">О</div>
-        <div>
-          <div class="review-name">Олексій, Одеса</div>
-          <div class="review-meta">Власник дачі</div>
-        </div>
+<div class="reviews-section">
+  <div class="section">
+    <h2 class="section-title">Відгуки покупців</h2>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">«Замовив генератор після того, як на дачі з'явилися комарі — вже на другий день після обробки забув, що таке кусачки. Дружина в захваті, діти нарешті можуть гуляти ввечері. Рекомендую всім!»</p>
+        <div class="review-author"><div class="review-avatar">О</div><div><div class="review-name">Олексій, Одеса</div><div class="review-meta">Власник дачі</div></div></div>
       </div>
-    </div>
-    <div class="review-card">
-      <div class="review-stars">★★★★★</div>
-      <p class="review-text">«Використовую для обробки теплиці. Порівняно зі звичайним обприскувачем — небо і земля. Туман рівномірно покриває кожен листочок, попелиця зникла за один раз. Якість відмінна, двигун не підводить.»</p>
-      <div class="review-author">
-        <div class="review-avatar">Н</div>
-        <div>
-          <div class="review-name">Наталія, Херсон</div>
-          <div class="review-meta">Фермер, теплиці</div>
-        </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">«Використовую для обробки теплиці. Порівняно зі звичайним обприскувачем — небо і земля. Туман рівномірно покриває кожен листочок, попелиця зникла за один раз. Якість відмінна, двигун не підводить.»</p>
+        <div class="review-author"><div class="review-avatar">Н</div><div><div class="review-name">Наталія, Херсон</div><div class="review-meta">Фермер, теплиці</div></div></div>
       </div>
-    </div>
-    <div class="review-card">
-      <div class="review-stars">★★★★★</div>
-      <p class="review-text">«Прочитав про тигрового комара і одразу замовив. Доставка швидка, менеджер все пояснив по телефону. Обробив ділянку та сарай — ефект відчувається одразу. Ціна повністю виправдана!»</p>
-      <div class="review-author">
-        <div class="review-avatar">В</div>
-        <div>
-          <div class="review-name">Василь, Миколаїв</div>
-          <div class="review-meta">Приватний будинок</div>
-        </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">«Прочитав про тигрового комара і одразу замовив. Доставка швидка, менеджер все пояснив по телефону. Обробив ділянку та сарай — ефект відчувається одразу. Ціна повністю виправдана!»</p>
+        <div class="review-author"><div class="review-avatar">В</div><div><div class="review-name">Василь, Миколаїв</div><div class="review-meta">Приватний будинок</div></div></div>
       </div>
-    </div>
-    <div class="review-card">
-      <div class="review-stars">★★★★★</div>
-      <p class="review-text">«Беру вже другий сезон поспіль. Обробляємо склад та прилеглу територію — ніяких комарів, мух і павуків. Зручний у роботі, легкий, заводиться з першого разу. Дуже задоволена покупкою!»</p>
-      <div class="review-author">
-        <div class="review-avatar">І</div>
-        <div>
-          <div class="review-name">Ірина, Запоріжжя</div>
-          <div class="review-meta">Власниця складу</div>
-        </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">«Беру вже другий сезон поспіль. Обробляємо склад та прилеглу територію — ніяких комарів, мух і павуків. Зручний у роботі, легкий, заводиться з першого разу. Дуже задоволена покупкою!»</p>
+        <div class="review-author"><div class="review-avatar">І</div><div><div class="review-name">Ірина, Запоріжжя</div><div class="review-meta">Власниця складу</div></div></div>
       </div>
     </div>
   </div>
 </div>
-
-<hr class="section-sep" />
 
 <!-- BOTTOM ORDER FORM -->
 <div class="order-section">
   <div class="section">
     <h2 class="section-title">Замов зараз — захисти свою родину!</h2>
     <p class="sub-text">Тигровий комар вже тут. Не чекай, поки він вкусить. Залиш заявку і ми зв'яжемося з тобою протягом 15 хвилин.</p>
-    <div class="bottom-form-wrap">
-      <form class="bottom-form" id="bottomForm" name="contact" data-netlify="true" netlify-honeypot="bot-field">
-        <input type="hidden" name="form-name" value="contact" />
-        <div class="bot-field-wrap"><label>Не заповнюй це поле: <input name="bot-field" /></label></div>
-        <input type="text" name="name" placeholder="Ваше ім'я *" required />
-        <input type="tel" name="phone" placeholder="Номер телефону *" required />
-        <textarea name="message" placeholder="Повідомлення (необов'язково)"></textarea>
-        <button type="submit" class="btn-order">Замовити та захиститись!</button>
-      </form>
-      <div class="success-msg" id="bottomSuccess">Дякуємо, заявку надіслано!</div>
-    </div>
+    <form class="bottom-form" id="bottomForm" name="contact" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="contact" />
+      <div class="bot-field-wrap"><label>Не заповнюй це поле: <input name="bot-field" /></label></div>
+      <input type="text" name="name" placeholder="Ваше ім'я *" required />
+      <input type="tel" name="phone" placeholder="Номер телефону *" required />
+      <textarea name="message" placeholder="Повідомлення (необов'язково)"></textarea>
+      <button type="submit" class="btn-order">Замовити та захиститись!</button>
+    </form>
+    <div class="success-msg" id="bottomSuccess">Дякуємо, заявку надіслано!</div>
   </div>
 </div>
 
@@ -740,8 +601,8 @@
 <script>
   /* ── LIGHTBOX ── */
   var gallery = Array.from(document.querySelectorAll('.gallery-thumb'));
-  var lb      = document.getElementById('lightbox');
-  var lbImg   = document.getElementById('lbImg');
+  var lb = document.getElementById('lightbox');
+  var lbImg = document.getElementById('lbImg');
   var current = 0;
 
   function lbShow(index) {
@@ -766,7 +627,7 @@
   document.addEventListener('keydown', function(e) {
     if (!lb.classList.contains('open')) return;
     if (e.key === 'Escape') lbClose();
-    if (e.key === 'ArrowLeft')  lbShow(current - 1);
+    if (e.key === 'ArrowLeft') lbShow(current - 1);
     if (e.key === 'ArrowRight') lbShow(current + 1);
   });
 
