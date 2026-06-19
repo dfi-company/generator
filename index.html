@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Генератор гарячого туману — захист від комах та дезінфекція</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f7f0; color: #1a1a1a; }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 60%, #388e3c 100%);
+      color: #fff;
+      padding: 60px 20px 40px;
+      text-align: center;
+    }
+    .hero h1 { font-size: clamp(1.6rem, 4vw, 2.6rem); line-height: 1.25; margin-bottom: 14px; }
+    .hero p { font-size: 1.1rem; max-width: 640px; margin: 0 auto 28px; opacity: .9; }
+    .hero .phone-hero {
+      display: inline-block;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #fff;
+      text-decoration: none;
+      background: rgba(0,0,0,.25);
+      padding: 12px 32px;
+      border-radius: 50px;
+      letter-spacing: 1px;
+    }
+    .hero .phone-hero:hover { background: rgba(0,0,0,.4); }
+
+    /* NEWS BANNER */
+    .news-banner {
+      background: #fff3cd;
+      border-left: 5px solid #e65100;
+      padding: 18px 24px;
+      max-width: 860px;
+      margin: 28px auto 0;
+      border-radius: 0 8px 8px 0;
+    }
+    .news-banner .news-label {
+      font-size: .75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #e65100;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+    .news-banner h3 { font-size: 1rem; color: #333; line-height: 1.5; }
+    .news-banner p { font-size: .9rem; color: #555; margin-top: 6px; line-height: 1.5; }
+
+    /* SECTION WRAPPER */
+    .section { max-width: 900px; margin: 0 auto; padding: 50px 20px; }
+    .section-title {
+      font-size: 1.5rem;
+      color: #1b5e20;
+      margin-bottom: 24px;
+      padding-bottom: 10px;
+      border-bottom: 3px solid #a5d6a7;
+    }
+
+    /* PRODUCT */
+    .product-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+    @media(max-width:600px){ .product-grid { grid-template-columns: 1fr; } }
+    .product-grid img {
+      width: 100%;
+      border-radius: 12px;
+      object-fit: cover;
+      max-height: 320px;
+      box-shadow: 0 4px 16px rgba(0,0,0,.12);
+    }
+
+    /* VIDEO */
+    .video-wrap {
+      position: relative;
+      padding-bottom: 56.25%;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,.15);
+      background: #000;
+    }
+    .video-wrap video {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+    }
+
+    /* FEATURES */
+    .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px,1fr)); gap: 16px; }
+    .feature-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,.08);
+      text-align: center;
+    }
+    .feature-card .icon { font-size: 2.2rem; margin-bottom: 10px; }
+    .feature-card h4 { font-size: 1rem; color: #2e7d32; margin-bottom: 6px; }
+    .feature-card p { font-size: .88rem; color: #555; line-height: 1.5; }
+
+    /* DESCRIPTION */
+    .desc { background: #fff; border-radius: 12px; padding: 28px; box-shadow: 0 2px 10px rgba(0,0,0,.07); }
+    .desc h3 { color: #1b5e20; margin-bottom: 14px; }
+    .desc ul { padding-left: 20px; }
+    .desc ul li { margin-bottom: 8px; line-height: 1.6; color: #333; }
+
+    /* ORDER FORM */
+    .order-section { background: #e8f5e9; }
+    .order-section .section { text-align: center; }
+    form { display: flex; flex-direction: column; gap: 14px; max-width: 440px; margin: 0 auto; }
+    form input, form textarea, form select {
+      padding: 14px 16px;
+      border: 1.5px solid #a5d6a7;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: inherit;
+      background: #fff;
+      transition: border-color .2s;
+    }
+    form input:focus, form textarea:focus { outline: none; border-color: #2e7d32; }
+    form textarea { resize: vertical; min-height: 90px; }
+    .btn-order {
+      background: #e65100;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 16px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      letter-spacing: .5px;
+      transition: background .2s, transform .1s;
+    }
+    .btn-order:hover { background: #bf360c; transform: translateY(-1px); }
+
+    /* PHONE STRIP */
+    .phone-strip {
+      background: #1b5e20;
+      color: #fff;
+      text-align: center;
+      padding: 28px 20px;
+    }
+    .phone-strip p { font-size: 1rem; margin-bottom: 8px; opacity: .85; }
+    .phone-strip a {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #fff;
+      text-decoration: none;
+      letter-spacing: 1px;
+    }
+    .phone-strip a:hover { color: #a5d6a7; }
+
+    /* SUCCESS */
+    .success-msg {
+      display: none;
+      background: #c8e6c9;
+      border-radius: 8px;
+      padding: 18px;
+      text-align: center;
+      font-size: 1.05rem;
+      color: #1b5e20;
+      font-weight: 600;
+    }
+
+    footer { background: #111; color: #777; text-align: center; padding: 20px; font-size: .83rem; }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>Генератор гарячого туману<br>для дезінфекції та знищення комах</h1>
+  <p>Артикул: 147539 &nbsp;|&nbsp; Ефективна обробка від тигрового комара, шкідників рослин та патогенів</p>
+  <a class="phone-hero" href="tel:+380000000000">+38 (000) 000-00-00</a>
+</div>
+
+<!-- NEWS BANNER -->
+<div style="background:#fff8f0; padding: 20px;">
+  <div class="news-banner">
+    <div class="news-label">⚠️ Актуальна загроза в Україні</div>
+    <h3>В Україні виявлено небезпечного тигрового комара: переносить лихоманку Західного Нілу, денге, чикунгунью та вірус Зіка</h3>
+    <p>Укус цього комара може спричинити високу температуру, сильний головний біль, ураження нервової системи, менінгіт та навіть параліч. Тигровий комар легко впізнати за характерними білими смугами на тілі та лапках — і він вже оселився на Півдні України.</p>
+    <p style="margin-top:10px; color:#e65100; font-weight:600;">Рішення — обробка гарячим туманом. Проникає в найважчодоступніші місця та знищує комарів на всіх стадіях.</p>
+  </div>
+</div>
+
+<!-- PRODUCT PHOTOS -->
+<div class="section">
+  <h2 class="section-title">Фото товару</h2>
+  <div class="product-grid">
+    <img src="147539_1.jpg" alt="Генератор гарячого туману — вигляд 1" />
+    <img src="147539_2.jpg" alt="Генератор гарячого туману — вигляд 2" />
+  </div>
+</div>
+
+<!-- VIDEO -->
+<div class="section" style="padding-top: 0;">
+  <h2 class="section-title">Відео</h2>
+  <div class="video-wrap">
+    <video controls preload="none" poster="147539_1.jpg">
+      <source src="відео генератор туману.mp4" type="video/mp4" />
+      Ваш браузер не підтримує відео.
+    </video>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<div style="background: #fff;">
+  <div class="section">
+    <h2 class="section-title">Переваги генератора</h2>
+    <div class="features">
+      <div class="feature-card">
+        <div class="icon">🦟</div>
+        <h4>Знищення комарів</h4>
+        <p>Ефективно діє проти тигрового комара та інших шкідників — у важкодоступних місцях, кущах, підвалах.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">🌿</div>
+        <h4>Обробка рослин</h4>
+        <p>Рівномірно покриває листя та стебла — ідеально для захисту саду, теплиці, городу.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">🏠</div>
+        <h4>Дезінфекція приміщень</h4>
+        <p>Туман проникає в кожен куток: ідеально для складів, ферм, підсобних приміщень.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">⚡</div>
+        <h4>Швидка дія</h4>
+        <p>Гарячий туман діє миттєво. Мінімум часу — максимум охопленої площі.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DESCRIPTION -->
+<div class="section">
+  <h2 class="section-title">Опис товару</h2>
+  <div class="desc">
+    <h3>Генератор гарячого туману — артикул 147539</h3>
+    <p style="margin-bottom:14px; color:#555; line-height:1.6;">
+      Потужний генератор гарячого туману призначений для обробки відкритих і закритих просторів інсектицидами, фунгіцидами та дезінфектантами. Гаряче аерозольне хмаро проникає туди, куди звичайний обприскувач не дістанеться — під листя, у тріщини, у густі зарослі.
+    </p>
+    <ul>
+      <li>Знищення тигрового комара, мошки, кліщів та інших шкідників</li>
+      <li>Обробка рослин від хвороб та шкідників у саду і теплицях</li>
+      <li>Дезінфекція приміщень: ферми, склади, підвали, гаражі</li>
+      <li>Сумісний з будь-якими водорозчинними препаратами</li>
+      <li>Великий бак для тривалої безперебійної роботи</li>
+      <li>Проста регулювання інтенсивності туману</li>
+      <li>Надійний бензиновий двигун — працює без мережі</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ORDER FORM -->
+<div class="order-section">
+  <div class="section">
+    <h2 class="section-title" style="text-align:center; border-bottom-color:#81c784;">Замовити зараз</h2>
+    <p style="margin-bottom:24px; color:#444;">Залиште заявку — передзвонимо протягом 15 хвилин і відповімо на всі питання.</p>
+    <form id="orderForm">
+      <input type="text" name="name" placeholder="Ваше ім'я *" required />
+      <input type="tel" name="phone" placeholder="Номер телефону *" required />
+      <textarea name="comment" placeholder="Коментар (необов'язково)"></textarea>
+      <button type="submit" class="btn-order">Замовити — передзвонимо!</button>
+    </form>
+    <div class="success-msg" id="successMsg">
+      Дякуємо! Ваша заявка прийнята. Ми зв'яжемося з вами найближчим часом. 🎉
+    </div>
+  </div>
+</div>
+
+<!-- PHONE STRIP -->
+<div class="phone-strip">
+  <p>Або зателефонуйте нам прямо зараз:</p>
+  <a href="tel:+380000000000">+38 (000) 000-00-00</a>
+</div>
+
+<footer>
+  &copy; 2026 Генератор гарячого туману &mdash; артикул 147539
+</footer>
+
+<script>
+  document.getElementById('orderForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    this.style.display = 'none';
+    document.getElementById('successMsg').style.display = 'block';
+  });
+</script>
+
+</body>
+</html>
