@@ -134,6 +134,37 @@
       letter-spacing: .5px;
     }
 
+    /* PRODUCT PRICE */
+    .product-price {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .product-price-old {
+      font-size: 1.2rem;
+      color: #999;
+      text-decoration: line-through;
+      font-weight: 600;
+    }
+    .product-price-new {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #e65100;
+    }
+    .product-price-badge {
+      background: #b71c1c;
+      color: #fff;
+      font-size: .75rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: .4px;
+    }
+
     /* SCROLL BUTTON */
     .btn-scroll {
       display: inline-block;
@@ -539,6 +570,11 @@
     <img class="gallery-thumb" src="147539_2.jpg" alt="Генератор гарячого туману — вигляд 2" data-index="1" />
   </div>
   <div style="text-align:center; margin-top:32px;">
+    <div class="product-price">
+      <span class="product-price-old">8 900 ₴</span>
+      <span class="product-price-new">7 199 ₴</span>
+      <span class="product-price-badge">Кількість обмежена</span>
+    </div>
     <a class="btn-scroll" href="#order">Замовити зі знижкою</a>
   </div>
 </div>
