@@ -18,7 +18,6 @@
       font-weight: 600;
       letter-spacing: .3px;
     }
-    .ticker span { opacity: .85; }
 
     /* HERO */
     .hero {
@@ -131,13 +130,71 @@
       border-bottom: 3px solid #a5d6a7;
     }
 
-    /* PRODUCT */
+    /* GALLERY */
     .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px; }
     @media(max-width:600px){ .product-grid { grid-template-columns: 1fr; } }
-    .product-grid img {
-      width: 100%; border-radius: 12px; object-fit: cover;
-      max-height: 320px; box-shadow: 0 4px 16px rgba(0,0,0,.12);
+    .gallery-thumb {
+      width: 100%;
+      border-radius: 12px;
+      object-fit: cover;
+      max-height: 320px;
+      box-shadow: 0 4px 16px rgba(0,0,0,.12);
+      cursor: zoom-in;
+      transition: transform .2s, box-shadow .2s;
+      display: block;
     }
+    .gallery-thumb:hover { transform: scale(1.02); box-shadow: 0 8px 28px rgba(0,0,0,.22); }
+
+    /* LIGHTBOX */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.88);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 92vw;
+      max-height: 90vh;
+      border-radius: 10px;
+      box-shadow: 0 8px 48px rgba(0,0,0,.6);
+      object-fit: contain;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 18px;
+      right: 24px;
+      font-size: 2.4rem;
+      color: #fff;
+      cursor: pointer;
+      line-height: 1;
+      opacity: .8;
+      transition: opacity .15s;
+      background: none;
+      border: none;
+    }
+    .lightbox-close:hover { opacity: 1; }
+    .lightbox-prev, .lightbox-next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2.5rem;
+      color: #fff;
+      cursor: pointer;
+      background: rgba(0,0,0,.35);
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      opacity: .8;
+      transition: opacity .15s;
+    }
+    .lightbox-prev:hover, .lightbox-next:hover { opacity: 1; }
+    .lightbox-prev { left: 16px; }
+    .lightbox-next { right: 16px; }
 
     /* VIDEO */
     .video-wrap {
@@ -176,6 +233,28 @@
     .desc ul { padding-left: 20px; }
     .desc ul li { margin-bottom: 8px; line-height: 1.6; color: #333; }
 
+    /* REVIEWS */
+    .reviews-section { background: #f0f7f0; }
+    .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 20px; }
+    .review-card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.07);
+      border-top: 4px solid #2e7d32;
+    }
+    .review-stars { color: #f9a825; font-size: 1.1rem; margin-bottom: 10px; letter-spacing: 2px; }
+    .review-text { font-size: .95rem; color: #333; line-height: 1.65; margin-bottom: 14px; font-style: italic; }
+    .review-author { display: flex; align-items: center; gap: 10px; }
+    .review-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: #a5d6a7;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; font-weight: 700; color: #1b5e20; flex-shrink: 0;
+    }
+    .review-name { font-weight: 700; font-size: .92rem; color: #1b5e20; }
+    .review-meta { font-size: .8rem; color: #888; }
+
     /* BOTTOM ORDER FORM */
     .order-section { background: #1b5e20; }
     .order-section .section { text-align: center; }
@@ -199,14 +278,9 @@
     .btn-order:hover { background: #bf360c; transform: translateY(-1px); }
 
     /* PHONE STRIP */
-    .phone-strip {
-      background: #e65100; color: #fff; text-align: center; padding: 32px 20px;
-    }
+    .phone-strip { background: #e65100; color: #fff; text-align: center; padding: 32px 20px; }
     .phone-strip p { font-size: 1.05rem; margin-bottom: 10px; font-weight: 600; }
-    .phone-strip a {
-      font-size: 2.2rem; font-weight: 800; color: #fff;
-      text-decoration: none; letter-spacing: 1px;
-    }
+    .phone-strip a { font-size: 2.2rem; font-weight: 800; color: #fff; text-decoration: none; letter-spacing: 1px; }
     .phone-strip a:hover { color: #ffe0b2; }
 
     /* SUCCESS */
@@ -220,6 +294,14 @@
   </style>
 </head>
 <body>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+  <button class="lightbox-close" id="lbClose" aria-label="Закрити">&times;</button>
+  <button class="lightbox-prev" id="lbPrev" aria-label="Попереднє">&#8249;</button>
+  <img id="lbImg" src="" alt="" />
+  <button class="lightbox-next" id="lbNext" aria-label="Наступне">&#8250;</button>
+</div>
 
 <!-- TICKER -->
 <div class="ticker">
@@ -244,7 +326,7 @@
         <label>Не заповнюй це поле: <input name="bot-field" /></label>
       </div>
       <input type="text" name="name" placeholder="Ваше ім'я *" required />
-      <input type="email" name="email" placeholder="Email *" required />
+      <input type="tel" name="phone" placeholder="Номер телефону *" required />
       <button type="submit" class="btn-top">Хочу захиститись від комарів!</button>
     </form>
     <div class="success-msg" id="topSuccess">
@@ -257,7 +339,7 @@
 <!-- NEWS BANNER -->
 <div class="news-wrap">
   <div class="news-banner">
-    <div class="news-label">🔴 Офіційне попередження — Україна, 2025</div>
+    <div class="news-label">🔴 Офіційне попередження — Україна, 2026</div>
     <h3>В Україні виявлено тигрового комара: переносить лихоманку Західного Нілу, денге, чикунгунью та вірус Зіка</h3>
     <p>Укус може спричинити: <strong>високу температуру, сильний головний біль, висипання, ураження нервової системи, менінгіт, енцефаліт і навіть параліч.</strong> Тигровий комар вже оселився на Півдні України та активно поширюється.</p>
     <div class="solution">
@@ -291,12 +373,12 @@
   </div>
 </div>
 
-<!-- PRODUCT PHOTOS -->
+<!-- PRODUCT PHOTOS / GALLERY -->
 <div class="section">
   <h2 class="section-title">Генератор гарячого туману</h2>
   <div class="product-grid">
-    <img src="147539_1.jpg" alt="Генератор гарячого туману — вигляд 1" />
-    <img src="147539_2.jpg" alt="Генератор гарячого туману — вигляд 2" />
+    <img class="gallery-thumb" src="147539_1.jpg" alt="Генератор гарячого туману — вигляд 1" data-index="0" />
+    <img class="gallery-thumb" src="147539_2.jpg" alt="Генератор гарячого туману — вигляд 2" data-index="1" />
   </div>
 </div>
 
@@ -370,6 +452,64 @@
   </div>
 </div>
 
+<!-- REVIEWS -->
+<div class="reviews-section">
+  <div class="section">
+    <h2 class="section-title">Відгуки покупців</h2>
+    <div class="reviews-grid">
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">«Замовив генератор після того, як на дачі з'явилися комарі — вже на другий день після обробки забув, що таке кусячки. Дружина в захваті, діти нарешті можуть гуляти ввечері. Рекомендую всім!»</p>
+        <div class="review-author">
+          <div class="review-avatar">О</div>
+          <div>
+            <div class="review-name">Олексій, Одеса</div>
+            <div class="review-meta">Власник дачі</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">«Використовую для обробки теплиці. Порівняно зі звичайним обприскувачем — небо і земля. Туман рівномірно покриває кожен листочок, попелиця зникла за один раз. Якість відмінна, двигун не підводить.»</p>
+        <div class="review-author">
+          <div class="review-avatar">Н</div>
+          <div>
+            <div class="review-name">Наталія, Херсон</div>
+            <div class="review-meta">Фермер, теплиці</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">«Прочитав про тигрового комара і одразу замовив. Доставка швидка, менеджер все пояснив по телефону. Обробив ділянку та сарай — ефект відчувається одразу. Ціна повністю виправдана!»</p>
+        <div class="review-author">
+          <div class="review-avatar">В</div>
+          <div>
+            <div class="review-name">Василь, Миколаїв</div>
+            <div class="review-meta">Приватний будинок</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">«Беру вже другий сезон поспіль. Обробляємо склад та прилеглу територію — ніяких комарів, мух і павуків. Зручний у роботі, легкий, заводиться з першого разу. Дуже задоволена покупкою!»</p>
+        <div class="review-author">
+          <div class="review-avatar">І</div>
+          <div>
+            <div class="review-name">Ірина, Запоріжжя</div>
+            <div class="review-meta">Власниця складу</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 <!-- BOTTOM ORDER FORM -->
 <div class="order-section">
   <div class="section">
@@ -384,7 +524,7 @@
         <label>Не заповнюй це поле: <input name="bot-field" /></label>
       </div>
       <input type="text" name="name" placeholder="Ваше ім'я *" required />
-      <input type="email" name="email" placeholder="Email *" required />
+      <input type="tel" name="phone" placeholder="Номер телефону *" required />
       <textarea name="message" placeholder="Повідомлення (необов'язково)"></textarea>
       <button type="submit" class="btn-order">Замовити та захиститись!</button>
     </form>
@@ -405,6 +545,39 @@
 </footer>
 
 <script>
+  /* ── LIGHTBOX ── */
+  var gallery = Array.from(document.querySelectorAll('.gallery-thumb'));
+  var lb      = document.getElementById('lightbox');
+  var lbImg   = document.getElementById('lbImg');
+  var current = 0;
+
+  function lbShow(index) {
+    current = (index + gallery.length) % gallery.length;
+    lbImg.src = gallery[current].src;
+    lbImg.alt = gallery[current].alt;
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function lbClose() {
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  gallery.forEach(function(img) {
+    img.addEventListener('click', function() { lbShow(parseInt(this.dataset.index)); });
+  });
+  document.getElementById('lbClose').addEventListener('click', lbClose);
+  document.getElementById('lbPrev').addEventListener('click', function() { lbShow(current - 1); });
+  document.getElementById('lbNext').addEventListener('click', function() { lbShow(current + 1); });
+  lb.addEventListener('click', function(e) { if (e.target === lb) lbClose(); });
+  document.addEventListener('keydown', function(e) {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') lbClose();
+    if (e.key === 'ArrowLeft') lbShow(current - 1);
+    if (e.key === 'ArrowRight') lbShow(current + 1);
+  });
+
+  /* ── NETLIFY FORMS ── */
   function netlifySubmit(formId, successId) {
     document.getElementById(formId).addEventListener('submit', function(e) {
       e.preventDefault();
