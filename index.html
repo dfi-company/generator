@@ -97,6 +97,65 @@
       100% { transform: translateX(0); }
     }
 
+    /* PRICE BLOCK */
+    .price-block {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(0,0,0,.3);
+      border-radius: 50px;
+      padding: 10px 24px;
+      margin-bottom: 18px;
+      backdrop-filter: blur(4px);
+      position: relative;
+      z-index: 2;
+    }
+    .price-old {
+      font-size: 1.2rem;
+      color: rgba(255,255,255,.55);
+      text-decoration: line-through;
+      font-weight: 600;
+    }
+    .price-new {
+      font-size: 1.9rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: .5px;
+    }
+    .price-badge {
+      background: #e65100;
+      color: #fff;
+      font-size: .75rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+
+    /* SCROLL BUTTON */
+    .btn-scroll {
+      display: inline-block;
+      background: #fff;
+      color: #1b5e20;
+      font-size: 1.05rem;
+      font-weight: 800;
+      padding: 14px 36px;
+      border-radius: 50px;
+      text-decoration: none;
+      letter-spacing: .5px;
+      margin-bottom: 32px;
+      box-shadow: 0 4px 20px rgba(0,0,0,.25);
+      transition: background .2s, transform .1s, box-shadow .2s;
+      position: relative;
+      z-index: 2;
+    }
+    .btn-scroll:hover {
+      background: #f1f8e9;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 28px rgba(0,0,0,.3);
+    }
+
     /* TOP FORM BLOCK */
     .top-form-block {
       background: rgba(0,0,0,.28);
@@ -386,7 +445,16 @@
 
   <h1>Генератор гарячого туману —<br>знищуй комарів до того, як вони вкусять</h1>
   <div class="sub">Один прилад — тисячі метрів квадратних під захистом. Комарі, кліщі, шкідники рослин — усе одним туманом.</div>
-  <div class="urgency">Залишилась обмежена кількість — встигни замовити!</div>
+
+  <div class="price-block">
+    <div class="price-old">8 900 ₴</div>
+    <div class="price-new">7 199 ₴</div>
+    <div class="price-badge">Акційна ціна</div>
+  </div>
+
+  <div class="urgency">🔥 Залишилась обмежена кількість — встигни замовити!</div>
+
+  <a class="btn-scroll" href="#order">Замовити зі знижкою</a>
 
   <div class="top-form-block">
     <h2>Замовити зараз</h2>
@@ -597,7 +665,7 @@
 </div>
 
 <!-- BOTTOM ORDER FORM -->
-<div class="order-section">
+<div class="order-section" id="order">
   <div class="section">
     <h2 class="section-title">Замов зараз — захисти свою родину!</h2>
     <p class="sub-text">Тигровий комар вже тут. Не чекай, поки він вкусить. Залиш заявку і ми зв'яжемося з тобою протягом 15 хвилин.</p>
