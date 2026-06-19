@@ -134,14 +134,26 @@
       letter-spacing: .5px;
     }
 
-    /* PRODUCT PRICE */
-    .product-price {
-      display: inline-flex;
+    /* OFFER BOX */
+    .offer-box {
+      margin-top: 32px;
+      background: linear-gradient(135deg, #fff 0%, #f1f8e9 100%);
+      border: 2px solid #a5d6a7;
+      border-radius: 16px;
+      padding: 24px 28px;
+      text-align: center;
+      box-shadow: 0 6px 28px rgba(46,125,50,.15);
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .offer-top {
+      display: flex;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 16px;
-      flex-wrap: wrap;
       justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
     }
     .product-price-old {
       font-size: 1.2rem;
@@ -150,7 +162,7 @@
       font-weight: 600;
     }
     .product-price-new {
-      font-size: 2rem;
+      font-size: 2.2rem;
       font-weight: 800;
       color: #e65100;
     }
@@ -163,6 +175,52 @@
       border-radius: 20px;
       text-transform: uppercase;
       letter-spacing: .4px;
+    }
+
+    /* TIMER */
+    .timer-label {
+      font-size: .85rem;
+      color: #555;
+      font-weight: 600;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+    .timer-wrap {
+      display: inline-flex;
+      align-items: flex-end;
+      gap: 4px;
+      margin-bottom: 20px;
+    }
+    .timer-unit {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: #1b5e20;
+      color: #fff;
+      border-radius: 8px;
+      padding: 8px 14px;
+      min-width: 58px;
+    }
+    .timer-unit span {
+      font-size: 1.7rem;
+      font-weight: 800;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+    .timer-unit small {
+      font-size: .65rem;
+      opacity: .75;
+      margin-top: 3px;
+      text-transform: uppercase;
+      letter-spacing: .4px;
+    }
+    .timer-sep {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #1b5e20;
+      padding-bottom: 14px;
+      line-height: 1;
     }
 
     /* SCROLL BUTTON */
@@ -563,11 +621,21 @@
     <img class="gallery-thumb" src="147539_1.jpg" alt="Генератор гарячого туману — вигляд 1" data-index="0" />
     <img class="gallery-thumb" src="147539_2.jpg" alt="Генератор гарячого туману — вигляд 2" data-index="1" />
   </div>
-  <div style="text-align:center; margin-top:32px;">
-    <div class="product-price">
+  <div class="offer-box">
+    <div class="offer-top">
       <span class="product-price-old">8 900 ₴</span>
       <span class="product-price-new">7 199 ₴</span>
       <span class="product-price-badge">Кількість обмежена</span>
+    </div>
+    <div class="timer-label">⏳ Акція діє ще:</div>
+    <div class="timer-wrap">
+      <div class="timer-unit"><span id="t-days">00</span><small>днів</small></div>
+      <div class="timer-sep">:</div>
+      <div class="timer-unit"><span id="t-hours">00</span><small>годин</small></div>
+      <div class="timer-sep">:</div>
+      <div class="timer-unit"><span id="t-mins">00</span><small>хвилин</small></div>
+      <div class="timer-sep">:</div>
+      <div class="timer-unit"><span id="t-secs">00</span><small>секунд</small></div>
     </div>
     <a class="btn-scroll" href="#order">Замовити зі знижкою</a>
   </div>
@@ -719,6 +787,44 @@
 <footer>&copy; 2026 Генератор гарячого туману</footer>
 
 <script>
+  /* ── COUNTDOWN TIMER (3 days, auto-reset) ── */
+  (function() {
+    var DURATION = 3 * 24 * 60 * 60 * 1000; // 3 доби в мс
+    var KEY = 'timer_end';
+
+    function getEnd() {
+      var stored = localStorage.getItem(KEY);
+      var end = stored ? parseInt(stored, 10) : 0;
+      if (!end || end <= Date.now()) {
+        end = Date.now() + DURATION;
+        localStorage.setItem(KEY, end);
+      }
+      return end;
+    }
+
+    function pad(n) { return n < 10 ? '0' + n : '' + n; }
+
+    function tick() {
+      var end = getEnd();
+      var diff = end - Date.now();
+      if (diff <= 0) {
+        localStorage.removeItem(KEY);
+        diff = 0;
+      }
+      var d = Math.floor(diff / 86400000);
+      var h = Math.floor((diff % 86400000) / 3600000);
+      var m = Math.floor((diff % 3600000) / 60000);
+      var s = Math.floor((diff % 60000) / 1000);
+      document.getElementById('t-days').textContent  = pad(d);
+      document.getElementById('t-hours').textContent = pad(h);
+      document.getElementById('t-mins').textContent  = pad(m);
+      document.getElementById('t-secs').textContent  = pad(s);
+    }
+
+    tick();
+    setInterval(tick, 1000);
+  })();
+
   /* ── LIGHTBOX ── */
   var gallery = Array.from(document.querySelectorAll('.gallery-thumb'));
   var lb = document.getElementById('lightbox');
