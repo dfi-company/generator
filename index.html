@@ -55,6 +55,7 @@
     .top-form-block h2 { font-size: 1.2rem; margin-bottom: 6px; color: #fff; }
     .top-form-block p { font-size: .88rem; color: rgba(255,255,255,.8); margin-bottom: 16px; }
     .top-form-block form { display: flex; flex-direction: column; gap: 10px; }
+    .bot-field-wrap { display: none; }
     .top-form-block input {
       padding: 13px 16px;
       border: none;
@@ -234,13 +235,20 @@
   <div class="top-form-block">
     <h2>Замовити зараз</h2>
     <p>Залиш ім'я та телефон — передзвонимо протягом 15 хвилин</p>
-    <form id="topForm">
+    <form id="topForm"
+          name="contact"
+          data-netlify="true"
+          netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="contact" />
+      <div class="bot-field-wrap">
+        <label>Не заповнюй це поле: <input name="bot-field" /></label>
+      </div>
       <input type="text" name="name" placeholder="Ваше ім'я *" required />
-      <input type="tel" name="phone" placeholder="Номер телефону *" required />
+      <input type="email" name="email" placeholder="Email *" required />
       <button type="submit" class="btn-top">Хочу захиститись від комарів!</button>
     </form>
     <div class="success-msg" id="topSuccess">
-      Заявку прийнято! Ми зв'яжемося з вами найближчим часом.
+      Дякуємо, заявку надіслано!
     </div>
     <a class="phone-link" href="tel:+380000000000">або зателефонуйте: +38 (000) 000-00-00</a>
   </div>
@@ -367,14 +375,21 @@
   <div class="section">
     <h2 class="section-title">Замов зараз — захисти свою родину!</h2>
     <p class="sub-text">Тигровий комар вже тут. Не чекай, поки він вкусить. Залиш заявку і ми зв'яжемося з тобою протягом 15 хвилин.</p>
-    <form class="bottom-form" id="bottomForm">
+    <form class="bottom-form" id="bottomForm"
+          name="contact"
+          data-netlify="true"
+          netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="contact" />
+      <div class="bot-field-wrap">
+        <label>Не заповнюй це поле: <input name="bot-field" /></label>
+      </div>
       <input type="text" name="name" placeholder="Ваше ім'я *" required />
-      <input type="tel" name="phone" placeholder="Номер телефону *" required />
-      <textarea name="comment" placeholder="Коментар (необов'язково)"></textarea>
+      <input type="email" name="email" placeholder="Email *" required />
+      <textarea name="message" placeholder="Повідомлення (необов'язково)"></textarea>
       <button type="submit" class="btn-order">Замовити та захиститись!</button>
     </form>
     <div class="success-msg" id="bottomSuccess">
-      Заявку прийнято! Ми зв'яжемося з вами найближчим часом.
+      Дякуємо, заявку надіслано!
     </div>
   </div>
 </div>
@@ -390,15 +405,26 @@
 </footer>
 
 <script>
-  function handleForm(formId, successId) {
+  function netlifySubmit(formId, successId) {
     document.getElementById(formId).addEventListener('submit', function(e) {
       e.preventDefault();
-      this.style.display = 'none';
-      document.getElementById(successId).style.display = 'block';
+      var form = this;
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(new FormData(form)).toString()
+      })
+        .then(function() {
+          form.style.display = 'none';
+          document.getElementById(successId).style.display = 'block';
+        })
+        .catch(function() {
+          alert('Помилка відправки. Будь ласка, зателефонуйте нам.');
+        });
     });
   }
-  handleForm('topForm', 'topSuccess');
-  handleForm('bottomForm', 'bottomSuccess');
+  netlifySubmit('topForm', 'topSuccess');
+  netlifySubmit('bottomForm', 'bottomSuccess');
 </script>
 
 </body>
