@@ -7,6 +7,7 @@
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f7f0; color: #1a1a1a; }
+    html { scroll-behavior: smooth; }
 
     /* ── ALERT TICKER ── */
     .ticker {
@@ -136,24 +137,21 @@
     /* SCROLL BUTTON */
     .btn-scroll {
       display: inline-block;
-      background: #fff;
-      color: #1b5e20;
-      font-size: 1.05rem;
+      background: #e65100;
+      color: #fff;
+      font-size: 1.1rem;
       font-weight: 800;
-      padding: 14px 36px;
+      padding: 16px 44px;
       border-radius: 50px;
       text-decoration: none;
       letter-spacing: .5px;
-      margin-bottom: 32px;
-      box-shadow: 0 4px 20px rgba(0,0,0,.25);
-      transition: background .2s, transform .1s, box-shadow .2s;
-      position: relative;
-      z-index: 2;
+      box-shadow: 0 4px 20px rgba(230,81,0,.35);
+      transition: background .2s, transform .15s, box-shadow .2s;
     }
     .btn-scroll:hover {
-      background: #f1f8e9;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 28px rgba(0,0,0,.3);
+      background: #bf360c;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(230,81,0,.45);
     }
 
     /* TOP FORM BLOCK */
@@ -454,8 +452,6 @@
 
   <div class="urgency">🔥 Залишилась обмежена кількість — встигни замовити!</div>
 
-  <a class="btn-scroll" href="#order">Замовити зі знижкою</a>
-
   <div class="top-form-block">
     <h2>Замовити зараз</h2>
     <p>Залиш ім'я та телефон — передзвонимо протягом 15 хвилин</p>
@@ -541,6 +537,9 @@
   <div class="product-grid">
     <img class="gallery-thumb" src="147539_1.jpg" alt="Генератор гарячого туману — вигляд 1" data-index="0" />
     <img class="gallery-thumb" src="147539_2.jpg" alt="Генератор гарячого туману — вигляд 2" data-index="1" />
+  </div>
+  <div style="text-align:center; margin-top:32px;">
+    <a class="btn-scroll" href="#order">Замовити зі знижкою</a>
   </div>
 </div>
 </div>
